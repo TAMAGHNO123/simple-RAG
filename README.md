@@ -65,8 +65,19 @@ To use another document, place it in `data/` and update `DEFAULT_PDF_PATH` in `b
 
 ## Roadmap
 
+<<<<<<< HEAD
 - Add a FastAPI backend service
 - Add a web frontend in `frontend/`
 - Support uploading PDFs through the UI
 - Persist FAISS indexes
 - Add OCR support for scanned PDFs
+=======
+- [ ] Add sentence-aware/semantic chunking
+- [ ] Add a reranking step (e.g. cross-encoder) before passing chunks to the LLM
+- [ ] Persist the FAISS index to disk to avoid re-embedding on every run
+- [ ] Add OCR support for scanned/handwritten PDFs
+- [ ] Wrap the pipeline in a FastAPI backend with a simple web UI
+- [ ] Add retrieval evaluation metrics (recall@k, MRR)
+- [ ] Containerize with Docker for reproducible deployment
+
+>>>>>>> 73dadea6dc830cefe0d5f9852a89337aa7e1002f

@@ -113,6 +113,3 @@ python rag_pipeline_ollama.py
 - [ ] Add retrieval evaluation metrics (recall@k, MRR)
 - [ ] Containerize with Docker for reproducible deployment
 
-## License
-
-MIT

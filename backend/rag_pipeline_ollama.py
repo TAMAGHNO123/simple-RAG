@@ -1,8 +1,12 @@
 from pypdf import PdfReader
 from sentence_transformers import SentenceTransformer
+from pathlib import Path
 import faiss
 import numpy as np
 import ollama
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_PDF_PATH = PROJECT_ROOT / "data" / "sample.pdf"
 
 #extraction of given text
 def extract_text_from_pdf(pdf_path: str) -> str:
@@ -72,7 +76,7 @@ def call_llm(prompt: str, model: str = "llama3.2") -> str:
 
 
 def main():
-    pdf_path = "sample.pdf"
+    pdf_path = DEFAULT_PDF_PATH
     print("Extracting text from PDF...")
     text = extract_text_from_pdf(pdf_path)
     if not text.strip():

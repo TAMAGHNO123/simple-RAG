@@ -12,22 +12,29 @@ export default function App() {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    checkHealth();
+    let isMounted = true;
+
+    fetch(`${API_BASE}/health`)
+      .then((res) => res.json() as Promise<HealthResponse>)
+      .then((data) => {
+        if (isMounted) {
+          setBackendStatus(data.status === "ok" ? "online" : "offline");
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setBackendStatus("offline");
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [turns]);
-
-  async function checkHealth(): Promise<void> {
-    try {
-      const res = await fetch(`${API_BASE}/health`);
-      const data: HealthResponse = await res.json();
-      setBackendStatus(data.status === "ok" ? "online" : "offline");
-    } catch {
-      setBackendStatus("offline");
-    }
-  }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault();
